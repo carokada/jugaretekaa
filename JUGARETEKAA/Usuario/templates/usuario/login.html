@@ -1,0 +1,30 @@
+{% extends 'tienda/layout.html' %}
+{% load static %}
+{% block contenido_pagina %}
+
+    <h3 class="text-center text-uppercase">Login</h3><br><br>
+    
+    {% if message in messages %}
+    <div class="text-center" class="alert alert-danger" role="alert">
+        <p>{{message}}</p>
+    </div>
+    {% endif %}
+    <div class="text-center">
+        <form method="POST" action="">
+            {% csrf_token %}
+                <div class="form-group">
+                    <label for="login_usuario"></label>
+                    <input type="text" name="usename" placeholder="Usuario">
+                </div><br>
+                <div class="form-goup">
+                    <label for="login_contrasena"></label>
+                    <input type="password" name="password" placeholder="Contrasena">
+                </div><br>
+                <input class="btn btn-success" type="submit" name="Ingresar" value="Ingresar">
+        </form>
+        <br><br>
+        <p>no esta registrado? <a href="{% url 'usuario:registro' %}">Registrerse</a></p>
+        <p>o <a href="{% url 'tienda:index' %}">vuelva al Inicio</a></p>
+    </div>
+
+{% endblock contenido_pagina %}

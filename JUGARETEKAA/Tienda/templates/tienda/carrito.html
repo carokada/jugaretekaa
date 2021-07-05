@@ -1,0 +1,23 @@
+{% extends 'tienda/layout.html' %}
+{% load static %}
+{% block contenido_pagina %}
+
+    <h3 class="text-center text-uppercase">Carrito</h3>
+
+    <h3>carrito de {{ user.get_username }}</h3>
+        <br>
+        <ul>
+            {% for producto in productos_carrito %}
+                <li>
+                    {{ producto }}
+                </li> 
+        </ul>
+            {% empty %}
+                <p>Usted no ha agregado ningun producto al carrito</p>
+            {% endfor %}
+
+        <a href="">eliminar productos</a>
+        <a type="button" href="{% url 'tienda:index'%}">Vaciar carrito</a>
+        <a type="button" href="{% url 'tienda:index'%}">Finalizar compra</a>
+        
+{% endblock contenido_pagina %}

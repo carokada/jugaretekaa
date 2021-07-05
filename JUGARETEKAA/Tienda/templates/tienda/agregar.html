@@ -1,0 +1,67 @@
+{% extends 'tienda/layout.html' %}
+{% load static %}
+{% block contenido_pagina %}
+
+    <h3 class="text-center text-uppercase">Agregar un nuevo producto</h3><br><br>
+
+    <div class="container m-4">
+        <form method="POST" action="{% url 'tienda:agregar' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="agregar_input_titulo" class="form-label">Titulo:</label>
+                        <input class="form-control" type="text">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="agregar_input_img" class="form-label">Imagen:</label>
+                        <input class="form-control" type="file">
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="form-group">
+                        <label for="agregar_input_categoria" class="form-label">Categoria:</label>
+                        <select class="form-select">
+                            {% for categoria in categorias %}
+                                <option>{{ categoria }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label for="agregar_input_descripcion" class="form-label">Descripcion:</label>
+                    <textarea class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-8"></div>
+                <div class="col">
+                    <label for="agregar_input_precio" class="form-label">Precio:</label>
+                    <input class="form-control" type="text">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <br><br>
+                    <input class="btn btn-warning" type="submit" value="Agregar">
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col text-center">
+                <br><br>
+                <a href="{% url 'tienda:index' %}">Volver al Inicio</a>
+            </div>
+        </div>
+    </div>
+    <br><br>
+    
+   
+
+{% endblock contenido_pagina %}

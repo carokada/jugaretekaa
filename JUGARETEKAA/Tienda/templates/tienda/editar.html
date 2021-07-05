@@ -1,0 +1,58 @@
+{% extends 'tienda/layout.html' %}
+{% load static %}
+{% block contenido_pagina %}
+
+    <h3 class="text-center text-uppercase">Editar un producto</h3><br><br>
+    <div class="container">
+        <form method="POST" action="{% url 'tienda:editar' %}" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="producto_input_titulo">Titulo:</label>
+                        {{ form.titulo }} {{ form.titulo.errors }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="producto_input_imagen">Imagen:</label>
+                        <div class="form-control-file">
+                            {{ form.imagen }} {{ form.imagen.errors }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="producto_input_categoria">Categoria:</label>
+                        {{ form.categoria }} {{ form.categoria.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="producto_input_descripcion">Descripcion:</label>
+                        {{ form.descripcion }} {{ form.descripcion.errors }}
+                    </div>
+                    <div class="form-group">
+                        <label for="producto_input_precio">Precio:</label>
+                        {{ form.precio }} {{ form.precio.errors }}
+                    </div>
+                    <br><br>
+                    <input class="btn btn-outline-success text-center" type="submit" value="Editar">
+                    <br><br>
+                    <a class="btn btn-warning" href="{% url 'tienda:index' %}">Volver al Inicio</a>
+                </div>
+            </div>            
+        </form>
+    </div>
+    
+    <div class="container">
+        <form method="POST" action="{% url 'tienda:editar' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for field in form %}
+                <p>{{field.label}}</p>
+                <p>{{field}}</p>
+            {% endfor %}
+        </form>
+    </div>
+       
+
+{% endblock contenido_pagina %}

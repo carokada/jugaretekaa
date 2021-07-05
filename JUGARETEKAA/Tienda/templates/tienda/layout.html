@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS only Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Bootstrap icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
+    <title>Jaguarete Kaa S.A. - Tienda Virtual</title>
+</head>
+
+<body>
+    <header class="p-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="d-sm-flex justify-content-between">
+                        <div class="d-flex position-relative">
+                            <img class="flex-shrink-0 me-3" src="/Static/images/jaguarete_logo.jpg" alt="Jaguarete Kaa S.A. logo" width="180" height="180">
+                            <div class="m-0 align-self-center">
+                                <h1 class="text-uppercase fw-bolder">Jaguarete kaa</h1>
+                            <h4><em>la juguetería para coleccionistas</em></h4>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-3">
+                    <h5 class="fw-bold">Bienvenidx!</h5>
+                    {% if user.is_authenticated %}
+                    <div class="row">
+                        <div class="col">
+                            <p>Usted está conectado como <span><strong>{{ user.get_username }}</strong></span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-outline-success text-success" id="carrito"><a href="">carrito</a></button>
+                            <button class="btn btn-outline-success text-success" id="logout"><a href="{% url 'usuario:logout' %}">desconectar</a></button>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="row">
+                        <div class="col">
+                            <button class="btn btn-outline-success text-success" id="login"><a href="{% url 'login' %}">login</a></button>
+                            <button class="btn btn-outline-success text-success" id="registro"><a href="{% url 'usuario:registro' %}">registro</a></button>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-success bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand link-light" href="#">JAGUARETE KAA S.A.</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link link-light" href="{% url 'tienda:index' %}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle link-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            {% for categoria in categorias %}
+                            <li><a class="dropdown-item" href="{% url 'tienda:filtro_categorias' categoria.id %}">{{ categoria }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-light" href="{% url 'tienda:acerca' %}">Acerca de</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link link-light" href="{% url 'tienda:contacto' %}">Contacto</a>
+                    </li>
+                        {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link link-light" href="{% url 'tienda:agregar' %}">Agregar Producto</a>
+                    </li>
+                        {% endif %}
+                </ul>
+                <form class="d-flex" method="GET" action="">
+                    <div class="input-group">
+                        <input class="form-control me-2" type="search" placeholder="buscar" aria-label="buscar">
+                        <button class="btn btn-warning" type="submit"><i class="bi bi-search"></i></button>
+                    </div>              
+                </form>
+            </div>
+        </div>
+    </nav>
+    
+
+    <section>
+        <div class="container my-5">
+            {% block contenido_pagina %}
+
+            {% endblock contenido_pagina %}
+        </div>
+    </section>
+
+    <footer>
+
+        <div class="container text-end">
+            <p><span>JUGARETE KAA S.A.</span> | creado por @carokada</p>
+        </div>
+                
+    </footer>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>

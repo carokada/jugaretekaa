@@ -1,0 +1,37 @@
+{% extends 'tienda/layout.html' %}
+{% load static %}
+{% block contenido_pagina %}
+
+    <h3 class="text-center text-uppercase">{{ un_producto.titulo }}</h3><br><br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md">
+                <figure class="figure">
+                    <img class="figure-img img-fluid rounded" src="{{ media_url }} {{ un_producto.imagen.url }}" alt="{{ un_producto.imagen.name }}">
+                </figure>
+            </div>
+            <div class="col-md">
+                <h5><strong>{{ un_producto.categoria }}</strong></h5><br>
+                <p class="text-justify">{{ un_producto.descripcion }}</p><br>
+                <p class="btn btn-success align-self-end">$ {{ un_producto.precio|floatformat:2 }}</p><br><br>
+                <div class="row">
+                    <div class="col text-center">
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <input class="btn btn-outline-success" type="submit" value="Agregar al carrito">
+                        </form><br>
+                    </div>
+                    <div class="row">
+                        <div class="col-md text-center">
+                            <a class="btn btn-warning" href="{% url 'tienda:editar' un_producto.id %}">Editar producto</a>
+                            <a class="btn btn-warning" href="{% url 'tienda:eliminar' un_producto.id %}">Eliminar producto</a>
+                            <a class="btn btn-warning" href="{% url 'tienda:index' %}">Volver al Inicio</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock contenido_pagina %}
