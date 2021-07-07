@@ -3,14 +3,36 @@
 {% block contenido_pagina %}
 
 
-    <h3 class="text-center text-uppercase">Buscar</h3>
-
-    <ul>
-        {% for item in producto_buscar %}
-        <li>
-            {{ item }}
-        </li>
-        {% endfor %}
-    </ul>
+    <h3 class="text-center text-uppercase">Buscar</h3><br><br>
+    
+    <div class="container">
+        <table class="table table-stripped">
+            <thead>
+                <th scope="col"></th>
+                <th scope="col">producto</th>
+                <th scope="col">categoria</th>
+                <th scope="col">precio</th>
+                <th scope="col"></th>
+            </thead>
+            <tbody>
+                {% for item in filtro_productos %}
+                <tr>
+                    <td>
+                        <img class="img-thumbnail rounded" src="{{ media_url }} {{ item.imagen.url }}" alt="{{ item.imagen.name }}" width="200" height="200">
+                    </td>
+                    <td>{{ item.titulo }}</td>
+                    <td>{{ item.categoria }}</td>
+                    <td>{{ item.precio }}</td>
+                    <td>
+                        <button class="btn btn-warning text-dark"><a href="{% url 'tienda:producto' item.id %}">ver</a></button>
+                    </td>
+                </tr>
+                {% empty %}
+                    <p>Su busqueda no ha generado ningun resultado</p>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
 
 {% endblock contenido_pagina %}

@@ -4,48 +4,6 @@
 
 <!--funciona mal el product placement-->
     <br><br>
-    <div class="row text-center">
-            <div class="col-md">
-                <div class="card bg-secondary p-2">
-                    <div class="card-body">
-                        <h3 class="card-title
-                        ">{{ un_producto.titulo }}</h3>
-                        <div class="card-image container-fluid">
-                            <img src="{{ media_url }} {{ un_producto.imagen.url }}" alt="{{ un_producto.imagen.name }}">
-                        </div>
-                        <p class="card-text">{{ producto.descripcion }}</p>
-                        <a class="btn btn-warning" href="">ver producto</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="card bg-secondary p-2">
-                    <div class="card-body">
-                        <h3 class="card-title
-                        ">{{ producto.titulo }}</h3>
-                        <div class="card-image container-fluid">
-                            <img src="{{ media_url }} {{ producto.imagen.url }}" alt="{{ producto.imagen.name }}">
-                        </div>
-                        <p class="card-text">{{ producto.descripcion }}</p>
-                        <a class="btn btn-warning" href="">ver producto</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md">
-                <div class="card bg-secondary p-2">
-                    <div class="card-body">
-                        <h3 class="card-title
-                        ">{{ producto.titulo }}</h3>
-                        <div class="card-image container-fluid">
-                            <img src="{{ media_url }} {{ producto.imagen.url }}" alt="{{ producto.imagen.name }}">
-                        </div>
-                        <p class="card-text">{{ producto.descripcion }}</p>
-                        <a class="btn btn-warning" href="">ver producto</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     
     <div class="container">
         <table class="table table-stripped">
@@ -66,7 +24,7 @@
                         <td>{{ producto.categoria }}</td>
                         <td>{{ producto.precio }}</td>
                         <td>
-                            <button class="btn btn-warning text-dark"><a href="">ver</a></button>
+                            <button class="btn btn-warning text-dark"><a href="{% url 'tienda:producto' producto.id %}">ver</a></button>
                         </td>
                     </tr>
                 {% endfor %}

@@ -17,15 +17,19 @@
                 <p class="btn btn-success align-self-end">$ {{ un_producto.precio|floatformat:2 }}</p><br><br>
                 <div class="row">
                     <div class="col text-center">
-                        <form method="POST" action="">
+
+                        <form method="POST" action="{% url 'tienda:carrito_add' un_producto.id  %}">
                             {% csrf_token %}
                             <input class="btn btn-outline-success" type="submit" value="Agregar al carrito">
                         </form><br>
+                        
                     </div>
                     <div class="row">
                         <div class="col-md text-center">
+                            {% if user.is_staff %}
                             <a class="btn btn-warning" href="{% url 'tienda:editar' un_producto.id %}">Editar producto</a>
                             <a class="btn btn-warning" href="{% url 'tienda:eliminar' un_producto.id %}">Eliminar producto</a>
+                            {% endif %}
                             <a class="btn btn-warning" href="{% url 'tienda:index' %}">Volver al Inicio</a>
                         </div>
                     </div>

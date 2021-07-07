@@ -40,10 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # my apps
+    'Accounts.apps.AccountsConfig',
     'Tienda.apps.TiendaConfig',
-    'Usuario.apps.UsuarioConfig',
-
-
 ]
 
 MIDDLEWARE = [
@@ -61,7 +59,7 @@ ROOT_URLCONF = 'JUGARETEKAA.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(os.path.dirname(os.path.abspath(__file__)), 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,15 +122,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/Static/'
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'Static')
+    os.path.join(BASE_DIR, 'static')
 ]
 
 MEDIA_URL = '/images/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'Static/images')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -141,4 +139,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-LOGIN_REDIRECT_URL = '/Tienda'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'tienda:index'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = 'tienda:index'

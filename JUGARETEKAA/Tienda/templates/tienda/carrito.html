@@ -2,22 +2,43 @@
 {% load static %}
 {% block contenido_pagina %}
 
-    <h3 class="text-center text-uppercase">Carrito</h3>
+    <h3 class="text-center text-uppercase">Carrito</h3><br><br>
 
-    <h3>carrito de {{ user.get_username }}</h3>
-        <br>
-        <ul>
-            {% for producto in productos_carrito %}
-                <li>
-                    {{ producto }}
-                </li> 
-        </ul>
-            {% empty %}
-                <p>Usted no ha agregado ningun producto al carrito</p>
-            {% endfor %}
+    <h4>carrito de {{ user.get_username }}</h4>
+    <div class="container">
+        <table class="table table-stripped">
+            <thead>
+                <th scope="col"></th>
+                <th scope="col">producto</th>
+                <th scope="col">categoria</th>
+                <th scope="col">precio</th>
+                <th scope="col"></th>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>
+                        <img class="img-thumbnail rounded" src="{{ media_url }} {{ item.imagen.url }}" alt="{{ item.imagen.name }}" width="200" height="200">
+                    </td>
+                    <td>{{ item.titulo }}</td>
+                    <td>{{ item.categoria }}</td>
+                    <td>{{ item.precio }}</td>
+                    <td>
+                        <button class="btn btn-warning text-dark"><a href="{% url 'tienda:producto' item.id %}">ver</a></button>
+                    </td>
+                </tr>
+                {% empty %}
+                    <p>Usted no ha agregado ningun producto al carrito</p>
 
-        <a href="">eliminar productos</a>
-        <a type="button" href="{% url 'tienda:index'%}">Vaciar carrito</a>
-        <a type="button" href="{% url 'tienda:index'%}">Finalizar compra</a>
+                    {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+
+    
+
+    <a type="button" href="">Vaciar carrito</a>
+    <a type="button" href="{% url 'tienda:index'%}">Finalizar compra</a>
         
 {% endblock contenido_pagina %}

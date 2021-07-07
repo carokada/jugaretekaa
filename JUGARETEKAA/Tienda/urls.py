@@ -1,5 +1,5 @@
-from django.urls import path
 from . import views
+from django.urls import path
 
 app_name = "tienda"
 urlpatterns = [
@@ -16,6 +16,7 @@ urlpatterns = [
     path('editar/<int:producto_id>', views.editar_producto, name="editar"),
     path('eliminar/<int:producto_id>', views.eliminar_producto, name="eliminar"),
     
-    path('carrito/<int:carrito_id>', views.ver_carrito, name="carrito"),
-    path('carrito/<int:carrito_id>', views.agregar_al_carrito, name="carrito_add"),
+    path('carrito/<int:carrito_id>', views.carrito, name="carrito"),
+    path('agregar/<int:producto_id>', views.agregar_al_carrito, name="carrito_add"),
+    path('eliminar/<int:carrito_id>', views.carrito_eliminar, name="carrito_eliminar"),
 ]

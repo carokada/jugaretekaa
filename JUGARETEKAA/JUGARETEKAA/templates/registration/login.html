@@ -1,0 +1,26 @@
+{% extends 'tienda/layout.html' %}
+{% load static %}
+{% block contenido_pagina %}
+
+    <h3 class="text-center text-uppercase">Login</h3><br><br>
+    
+    {% if message in messages %}
+    <div class="text-center" class="alert alert-danger" role="alert">
+        <p>{{message}}</p>
+    </div>
+    {% endif %}
+    <div class="text-center">
+        <form method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div><br>
+                <input class="btn btn-success" type="submit" name="Ingresar" value="Ingresar">
+                <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+        <br><br>
+        <p>no esta registrado? <a href="{% url 'accounts:register' %}">Registrerse</a></p>
+        <p>o <a href="{% url 'tienda:index' %}">vuelva al Inicio</a></p>
+    </div>
+
+{% endblock contenido_pagina %}
